@@ -1,5 +1,6 @@
 # TerraFold-Trace
 **Predict. Protect. Prove**
+
 AI powered farm to market traceability and intelligence platform for African agrifood supply chains
 ## About TerraFold Trace
 TerraFold Trace is a digital platform designed to improve visibility, traceability, compliance, and decision-making across African agrifood supply chains.The platform aims to connect farmers, aggregators, processors, logistics providers, buyers, and other supply-chain stakeholders through reliable data and intelligent digital tools.
