@@ -1,36 +1,33 @@
-from fastapi import FastAPI
-
-app = FastAPI(
-    title="TerraFold Trace",
-    description="Agricultural Digital Infrastructure and Intelligence Platform",
-    version="0.1.0"
-)
-
-
-@app.get("/")
-def home():
-    return {
-        "message": "Welcome to TerraFold Trace",
-        "platform": "Agricultural Digital Infrastructure",
-        "status": "Operational"
-    }
-
-
-@app.get("/health")
-def health_check():
-    return {
-        "status": "healthy"
-    }
-
 
 from fastapi import FastAPI
 
-# Create the TerraFold Trace application
+# Import farmer routes
+from app.routes import farmers
+
+# Import database configuration
+from app.core.database import engine, Base
+
+# Import database models
+from app.models.farmer import Farmer
+
+
+# Create database tables
+Base.metadata.create_all(bind=engine)
+
+
+# Initialize TerraFold Trace
 app = FastAPI(
     title="TerraFold Trace",
-    description="Agricultural Digital Infrastructure and Intelligence Platform",
-    version="0.1.0"
+    description=(
+        "Agricultural Digital Infrastructure "
+        "and Intelligence Platform"
+    ),
+    version="0.2.0"
 )
+
+
+# Register application modules
+app.include_router(farmers.router)
 
 
 # Home endpoint
@@ -39,6 +36,7 @@ def home():
     return {
         "message": "Welcome to TerraFold Trace",
         "platform": "Agricultural Digital Infrastructure",
+        "company": "TerraFold Trace Ltd",
         "status": "Operational"
     }
 
@@ -48,39 +46,6 @@ def home():
 def health_check():
     return {
         "status": "healthy",
-        "application": "TerraFold Trace"
-    }
-
-from fastapi import FastAPI
-
-from app.routes import farmers
-
-
-app = FastAPI(
-    title="TerraFold Trace",
-    description="Agricultural Digital Infrastructure and Intelligence Platform",
-    version="0.1.0"
-)
-
-
-# Register application routes
-app.include_router(farmers.router)
-
-
-@app.get("/")
-def home():
-
-    return {
-        "message": "Welcome to TerraFold Trace",
-        "platform": "Agricultural Digital Infrastructure",
-        "status": "Operational"
-    }
-
-
-@app.get("/health")
-def health_check():
-
-    return {
-        "status": "healthy",
-        "application": "TerraFold Trace"
+        "application": "TerraFold Trace",
+        "database": "configured"
     }
